@@ -26,7 +26,7 @@ const HomePage: NextPage<Props> = ({pokemons}) => {
 
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getStaticProps: GetStaticProps = async () => {
 
     const {data} = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151')
 
@@ -39,7 +39,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     return {
         props: {
             pokemons,
-        }
+        },
+        revalidate: 86400, // 24hs
     }
 
 }
